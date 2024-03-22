@@ -26,17 +26,20 @@
         </div>
         <div class="row text-center mb-5">
             <div class="col-10">
-                <input type="text" id="nameInputBox" class="w-100">
+                <input type="text" id="nameInput" class="w-100 form-control" placeholder="Enter Names">
             </div>
-            <div class="col-2"><button class="btn btn-primary" onclick="saveNames()">Save List</button></div>
+            <div class="col-2"><button class="btn btn-primary" id="addNameBtn">Add Name(s)</button></div>
         </div>
-        <div class="row text-center">
-            <div class="col-10" id="nameDisplayDiv"></div>
-            <div class="col-2"><button class="btn btn-primary" onclick="randomName()">Generate Random Name</button></div>
+        <div class="row">
+            <div class="col-10">
+                <ul id="nameList" class="list-group"></ul>
+            </div>
+            <div class="col-2 text-center"><button class="btn btn-primary" id="pickRandomBtn">Generate Random Name</button>
+            </div>
         </div>
         <div class="row text-center">
             <div class="col-12">
-                <h1>The Selected Name Is:<br><span id="selectedNameDiv"></span></h1>
+                <h1>The Selected Name Is:<br><span id="randomName"></span></h1>
             </div>
         </div>
     </div>
