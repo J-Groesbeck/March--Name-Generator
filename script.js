@@ -14,6 +14,11 @@ function addName() {
 }
 
 document.getElementById('addNameBtn').addEventListener("click", addName)
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        addName()
+    }
+});
 
 function displayNames() {
     const nameList = document.getElementById('nameList') //get ul element
@@ -22,14 +27,35 @@ function displayNames() {
         const name = nameArray[i]
 
         const li = document.createElement('li')
-        li.className = 'list-group-item'
+        li.classList = 'row mb-2 p-1 border'
 
-        const span = document.createElement('span')
-        span.textContent = name
+        const div = document.createElement('div')
+        div.classList = 'col-10'
 
-        li.appendChild(span)
+        const h3 = document.createElement('h3')
+        h3.textContent = name
+        h3.classList = 'mb-0'
+
+        div.appendChild(h3)
+        li.appendChild(div)
         nameList.appendChild(li)
+
+        const button = document.createElement('button')
+        button.setAttribute('onclick', `removeListItem(${i})`);
+        button.textContent = "Remove"
+        button.classList = 'col-2 btn btn-primary'
+        li.appendChild(button)
     }
+}
+
+function removeListItem(listItemNum) {
+    for (let i = 0; i < nameArray.length; i++) {
+        if (listItemNum === i) {
+            nameArray.splice(listItemNum, 1)
+            break;
+        }
+    }
+    displayNames()
 }
 
 function generateName() {
