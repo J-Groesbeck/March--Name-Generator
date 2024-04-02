@@ -43,7 +43,7 @@ function displayNames() {
         const button = document.createElement('button')
         button.setAttribute('onclick', `removeListItem(${i})`);
         button.textContent = "Remove"
-        button.classList = 'col-4 btn btn-primary'
+        button.classList = 'col-4 btn btn-danger'
         li.appendChild(button)
     }
 }
