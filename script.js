@@ -118,8 +118,22 @@ function generateName() {
                             spinning = false; // Set spinning to false after all spins are completed
                             nameArray.splice(currentIndex, 1)
                             displayNames()
-                            //add sound effect
-                            //if get casino lights working then make them all blink before returning to before
+                            winSoundEffect()//add sound effect
+                            //make all lights blink before returning to before
+                            clearInterval(lightsInterval);
+                            for (let i = 0; i < 3; i++) {
+                                setTimeout(() => {
+                                    for (let j = 0; j < lightsArray.length; j++) {
+                                        lightsArray[j].src = 'imgs/light-4.png';
+                                    }
+                                    setTimeout(() => {
+                                        for (let j = 0; j < lightsArray.length; j++) {
+                                            lightsArray[j].src = 'imgs/light-1.png';
+                                        }
+                                    }, 500);
+                                }, i * 1000);
+                            }                            
+                            setTimeout(reactivateLights, 3000); // Call reactivateLights after the loops finish
                         }
                     };
                 };
@@ -128,6 +142,11 @@ function generateName() {
             doSpin(); // Start the first spin
         }
     }
+}
+
+function winSoundEffect() {
+    let snd = new Audio("sfx/win-sfx.mp3");
+    snd.play();
 }
 
 let lever = document.getElementById("lever");
@@ -139,8 +158,9 @@ function initializePull() {
 }
 
 function startPull() {
-    if(isDragging) {
-    topLever.classList.add("pull");}
+    if (isDragging) {
+        topLever.classList.add("pull");
+    }
 }
 function endPull() {
     if (isDragging) {
@@ -169,8 +189,10 @@ function lightsLoop() {
 lightsLoop();
 
 function deactivateLights() {
-    document.getElementById('deactivateLightsBtn').classList.add('d-none')
-    document.getElementById('reactivateLightsBtn').classList.remove('d-none')
+    if (document.getElementById('reactivateLightsBtn').classList.contains('d-none')) {
+        document.getElementById('deactivateLightsBtn').classList.add('d-none')
+        document.getElementById('reactivateLightsBtn').classList.remove('d-none')
+    }
     clearInterval(lightsInterval); // Stop the interval
     for (let i = 0; i < lightsArray.length; i++) {
         setTimeout(() => {
