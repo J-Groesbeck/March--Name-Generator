@@ -2,3 +2,36 @@
     border: 1px 1px 1px black;
     border-radius: 5px;
 }
+
+.slots {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.reel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    overflow: hidden;
+    position: relative;
+}
+
+.reel-content {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}

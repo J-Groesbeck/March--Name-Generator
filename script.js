@@ -58,15 +58,73 @@ function removeListItem(listItemNum) {
     displayNames()
 }
 
+const reelElement = document.querySelector('.reel');
+const spinButton = document.getElementById('spinButton');
+let currentIndex = 0;
+let spinning = false;
+
+function getNextName() {
+    currentIndex++;
+    if (currentIndex >= nameArray.length) {
+        currentIndex = 0;
+    }
+    return nameArray[currentIndex];
+}
+
 function generateName() {
-    const randomName = document.getElementById('randomName')
     if (!nameArray[0]) {
         alert("There are no names left to pick from!")
     } else {
-        let randomNumber = Math.floor(Math.random() * nameArray.length)
-        randomName.innerText = nameArray[randomNumber]
-        nameArray.splice(randomNumber, 1)
-        displayNames()
+        if (!spinning) {
+            spinning = true;
+            const spins = Math.floor(Math.random() * 11) + 20; // Random number of spins between 20 and 30
+            let spinCount = 0;
+    
+            function doSpin() {
+                const currentName = getNextName();
+                const nextName = currentName;
+    
+                let animationDuration = 500; // Default duration
+    
+                if (spinCount < spins - 15) {
+                    // Speed up at the start
+                    animationDuration = 50;
+                } else if (spinCount < spins - 7) {
+                    // Slow down a bit
+                    animationDuration = 150;
+                } else if (spinCount < spins - 3) {
+                    // Slow down a bit
+                    animationDuration = 300;
+                }
+    
+                const upAnimation = reelElement.children[0].animate([
+                    { transform: 'translateY(0)' },
+                    { transform: 'translateY(-100%)' }
+                ], { duration: animationDuration, fill: 'forwards' });
+    
+                upAnimation.onfinish = () => {
+                    reelElement.children[0].textContent = nextName;
+                    reelElement.children[0].style.transform = 'translateY(100%)';
+                    reelElement.children[0].animate([
+                        { transform: 'translateY(100%)' },
+                        { transform: 'translateY(0)' }
+                    ], { duration: animationDuration, fill: 'forwards' }).onfinish = () => {
+                        spinCount++;
+                        if (spinCount < spins) {
+                            doSpin(); // Repeat the spin if spinCount is less than spins
+                        } else {
+                            spinning = false; // Set spinning to false after all spins are completed
+                            nameArray.splice(currentIndex, 1)
+                            displayNames()
+                            //add sound effect
+                            //if get casino lights working then make them all blink before returning to before
+                        }
+                    };
+                };
+            }
+    
+            doSpin(); // Start the first spin
+        }
     }
 }
 
