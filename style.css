@@ -28,12 +28,11 @@
 .lever-container {
     width: 20%;
     position: relative;
-    left: -6rem;
 }
 
 #lever {
     position: relative;
-    top: 50%;
+    top: 25%;
     z-index: 10;
     cursor: pointer;
 }
@@ -43,7 +42,7 @@
     width: 40px;
     height: 70px;
     position: absolute;
-    right: -30px;
+    
     border-radius: 10px;
 }
 
@@ -74,7 +73,7 @@
     width: 60px;
     height: 15px;
     position: absolute;
-    right: -80px;
+    left: 10px;
     top: 27px;
     border-radius: 10px;
     transform-origin: left top;
