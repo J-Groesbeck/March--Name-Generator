@@ -130,7 +130,29 @@ function generateName() {
     }
 }
 
-document.getElementById('pickRandomBtn').addEventListener("click", generateName)
+let lever = document.getElementById("lever");
+let topLever = document.querySelector(".top");
+let isDragging = false;
+
+function initializePull() {
+    isDragging = true;
+}
+
+function startPull() {
+    if(isDragging) {
+    topLever.classList.add("pull");}
+}
+function endPull() {
+    if (isDragging) {
+        isDragging = false;
+        topLever.classList.remove("pull");
+        generateName()
+    }
+}
+
+lever.addEventListener("mousedown", initializePull);
+document.addEventListener("mousemove", startPull);
+document.addEventListener("mouseup", endPull);
 
 let lightsInterval; // Variable to hold the interval ID
 

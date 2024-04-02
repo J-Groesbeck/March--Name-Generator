@@ -24,3 +24,76 @@
     align-items: center;
     font-size: 30px;
 }
+
+.lever-container {
+    width: 20%;
+    position: relative;
+    left: -6rem;
+}
+
+#lever {
+    position: relative;
+    top: 50%;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.bottom {
+    background: #551c37;
+    width: 40px;
+    height: 70px;
+    position: absolute;
+    right: -30px;
+    border-radius: 10px;
+}
+
+.screw {
+    background: #333;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screw::before {
+    content: "";
+    background: #111;
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+} 
+
+.top {
+    background: #333;
+    width: 60px;
+    height: 15px;
+    position: absolute;
+    right: -80px;
+    top: 27px;
+    border-radius: 10px;
+    transform-origin: left top;
+    transition: transform 0.5s ease;
+}
+
+.pull {
+    transform: rotate(40deg);
+    transition: transform 1s ease;
+}
+
+.ball {
+    content: "";
+    display: block;
+    background: #ca1717;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: -40px;
+    top: -20px;
+    border-radius: 50%;
+}
