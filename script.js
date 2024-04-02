@@ -153,7 +153,7 @@ function deactivateLights() {
     for (let i = 0; i < lightsArray.length; i++) {
         setTimeout(() => {
             lightsArray[i].src = `imgs/light-1.png`;
-        }, i * 50); // Wait 50ms before setting each light
+        }, i * 15); // Wait 50ms before setting each light
     }
 }
 
@@ -166,7 +166,7 @@ function reactivateLights() {
         setTimeout(() => {
             let imageIndex = (i % 4) + 1; // Calculate image index from 1 to 4
             lightsArray[i].src = `imgs/light-${imageIndex}.png`;
-        }, i * 50); // Wait 50ms before setting each light
+        }, i * 15); // Wait 50ms before setting each light
     }
     lightsLoop(); // Restart the lights loop
 }
