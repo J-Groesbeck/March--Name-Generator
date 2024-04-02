@@ -71,6 +71,8 @@ function getNextName() {
     return nameArray[currentIndex];
 }
 
+let lightsArray = document.querySelectorAll('.lights');
+
 function generateName() {
     if (!nameArray[0]) {
         alert("There are no names left to pick from!")
@@ -79,13 +81,13 @@ function generateName() {
             spinning = true;
             const spins = Math.floor(Math.random() * 11) + 20; // Random number of spins between 20 and 30
             let spinCount = 0;
-    
+
             function doSpin() {
                 const currentName = getNextName();
                 const nextName = currentName;
-    
+
                 let animationDuration = 500; // Default duration
-    
+
                 if (spinCount < spins - 15) {
                     // Speed up at the start
                     animationDuration = 50;
@@ -96,12 +98,12 @@ function generateName() {
                     // Slow down a bit
                     animationDuration = 300;
                 }
-    
+
                 const upAnimation = reelElement.children[0].animate([
                     { transform: 'translateY(0)' },
                     { transform: 'translateY(-100%)' }
                 ], { duration: animationDuration, fill: 'forwards' });
-    
+
                 upAnimation.onfinish = () => {
                     reelElement.children[0].textContent = nextName;
                     reelElement.children[0].style.transform = 'translateY(100%)';
@@ -122,10 +124,51 @@ function generateName() {
                     };
                 };
             }
-    
+
             doSpin(); // Start the first spin
         }
     }
 }
 
 document.getElementById('pickRandomBtn').addEventListener("click", generateName)
+
+let lightsInterval; // Variable to hold the interval ID
+
+function lightsLoop() {
+    let i = 0;
+    lightsInterval = setInterval(() => {
+        for (let j = 0; j < lightsArray.length; j++) {
+            let imageIndex = (4 - i + j) % 4 + 1; // Calculate image index from 1 to 4
+            lightsArray[j].src = `imgs/light-${imageIndex}.png`;
+        }
+        i = (i + 1) % 4; // Increment i for the next iteration
+    }, 50);
+}
+lightsLoop();
+
+function deactivateLights() {
+    document.getElementById('deactivateLightsBtn').classList.add('d-none')
+    document.getElementById('reactivateLightsBtn').classList.remove('d-none')
+    clearInterval(lightsInterval); // Stop the interval
+    for (let i = 0; i < lightsArray.length; i++) {
+        setTimeout(() => {
+            lightsArray[i].src = `imgs/light-1.png`;
+        }, i * 50); // Wait 50ms before setting each light
+    }
+}
+
+document.getElementById('deactivateLightsBtn').addEventListener("click", deactivateLights)
+
+function reactivateLights() {
+    document.getElementById('deactivateLightsBtn').classList.remove('d-none')
+    document.getElementById('reactivateLightsBtn').classList.add('d-none')
+    for (let i = 0; i < lightsArray.length; i++) {
+        setTimeout(() => {
+            let imageIndex = (i % 4) + 1; // Calculate image index from 1 to 4
+            lightsArray[i].src = `imgs/light-${imageIndex}.png`;
+        }, i * 50); // Wait 50ms before setting each light
+    }
+    lightsLoop(); // Restart the lights loop
+}
+
+document.getElementById('reactivateLightsBtn').addEventListener("click", reactivateLights)
