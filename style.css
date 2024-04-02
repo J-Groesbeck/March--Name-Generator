@@ -34,7 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 40px;
     color: #111;
     font-family: 'JQKAs Wild' !important;
 }
@@ -56,7 +56,6 @@ body {
     width: 40px;
     height: 70px;
     position: absolute;
-    
     border-radius: 10px;
 }
 
@@ -80,7 +79,7 @@ body {
     height: 10px;
     display: block;
     border-radius: 50%;
-} 
+}
 
 .top {
     background: #333;

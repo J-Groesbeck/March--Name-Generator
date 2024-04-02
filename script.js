@@ -132,7 +132,7 @@ function generateName() {
                                         }
                                     }, 500);
                                 }, i * 1000);
-                            }                            
+                            }
                             setTimeout(reactivateLights, 3000); // Call reactivateLights after the loops finish
                         }
                     };
