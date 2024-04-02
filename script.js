@@ -30,7 +30,7 @@ function displayNames() {
         li.classList = 'row mb-2 p-1 border'
 
         const div = document.createElement('div')
-        div.classList = 'col-10'
+        div.classList = 'col-8'
 
         const h3 = document.createElement('h3')
         h3.textContent = name
@@ -43,7 +43,7 @@ function displayNames() {
         const button = document.createElement('button')
         button.setAttribute('onclick', `removeListItem(${i})`);
         button.textContent = "Remove"
-        button.classList = 'col-2 btn btn-primary'
+        button.classList = 'col-4 btn btn-primary'
         li.appendChild(button)
     }
 }
