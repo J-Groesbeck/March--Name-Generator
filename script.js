@@ -71,6 +71,7 @@ function getNextName() {
     return nameArray[currentIndex];
 }
 
+let lightsOn = true
 let lightsArray = document.querySelectorAll('.lights');
 
 function generateName() {
@@ -133,12 +134,13 @@ function generateName() {
                                     }, 500);
                                 }, i * 1000);
                             }
-                            setTimeout(reactivateLights, 3000); // Call reactivateLights after the loops finish
+                            if (lightsOn) {
+                                setTimeout(reactivateLights, 3000); // Call reactivateLights after the loops finish
+                            }
                         }
                     };
                 };
             }
-
             doSpin(); // Start the first spin
         }
     }
@@ -193,6 +195,7 @@ function deactivateLights() {
         document.getElementById('deactivateLightsBtn').classList.add('d-none')
         document.getElementById('reactivateLightsBtn').classList.remove('d-none')
     }
+    lightsOn = false
     clearInterval(lightsInterval); // Stop the interval
     for (let i = 0; i < lightsArray.length; i++) {
         setTimeout(() => {
@@ -206,6 +209,7 @@ document.getElementById('deactivateLightsBtn').addEventListener("click", deactiv
 function reactivateLights() {
     document.getElementById('deactivateLightsBtn').classList.remove('d-none')
     document.getElementById('reactivateLightsBtn').classList.add('d-none')
+    lightsOn = true
     for (let i = 0; i < lightsArray.length; i++) {
         setTimeout(() => {
             let imageIndex = (i % 4) + 1; // Calculate image index from 1 to 4
